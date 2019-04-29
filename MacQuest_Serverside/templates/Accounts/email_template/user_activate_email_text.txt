@@ -1,0 +1,4 @@
+Activated Notification
+Hello, {{ username }}, your account is activated by administrator on MacQuest website.
+You can login via {{ url }}
+Your current user type is {{ userType }}.

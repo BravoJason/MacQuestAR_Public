@@ -1,0 +1,53 @@
+{% load staticfiles %}
+<div class="row" id="navBar" style="margin:10px">
+    <!-- Brand/logo -->
+    <div class="col-md-4" id="logo" style="margin:auto">
+
+        <a class="navbar-brand" href="/">
+            <img src="{% static "img/logo.png" %}" alt="logo" style="width:100px;">
+        </a>
+    </div>
+    <!-- Website name -->
+    <div class="col-md-6" style="margin:auto">
+        <h1>MacQuest Event Website</h1>
+    </div>
+
+    <!-- Navigation drop down menu -->
+    <div class="col-md-2" style="margin:auto">
+        <ul class="dropdown" id="navMenu">
+            <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">Menu
+                <span class="caret"></span>
+            </button>
+            <ul class="dropdown-menu">
+                <li><a href="/" class="dropdown-item">Index</a></li>
+                {% if user.is_authenticated %}
+                    <li class="dropdown-item">Hi, {{ user.username }}</li>
+                    <!--Already login-->
+                    <li><a href="{% url "Accounts:password_change" %}?next={{ request.path }}" class="dropdown-item">Change
+                        password</a></li>
+
+                    {% if perms.Accounts.create_event %}
+                        <li><a href="{% url "EventManage:plannerAuth" %}?next={{ request.path }}" class="dropdown-item">Event
+                            Auth</a></li>
+                    {% endif %}
+
+                    {% if  perms.Accounts.view_event %}
+                        <li><a href="{% url "EventManage:viewAuth" %}?next={{ request.path }}" class="dropdown-item">Ask permission</a></li>
+                    {% endif %}
+
+                    <li><a href="{% url "Accounts:logout" %}?next={{ request.path }}" class="dropdown-item">Logout</a>
+                    </li>
+                {% else %}
+                    <!-- Doesn't login -->
+                    <li><a href="{% url "Accounts:register" %}?next={{ request.path }}"
+                           class="dropdown-item">Register</a></li>
+                    <li><a href="{% url "Accounts:login" %}?next={{ request.path }}" class="dropdown-item">Login</a>
+                    </li>
+                {% endif %}
+
+
+            </ul>
+        </ul>
+    </div>
+
+</div>

@@ -1,0 +1,13 @@
+1. Env		yum install https://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm
+		subscription-manager repos --enable "rhel-*-optional-rpms" --enable "rhel-*-extras-rpms"
+2. Python3.6	yum install python36
+		virtualenv -p python3 envname
+3. Add Accounts folder. (Without groups). 
+4. Make migrations.
+5. Add groups.
+6. Add other modules.(Withtou EventAPI)
+7. Make migrations.
+8. Add EventAPI.
+
+
+add superuser and change is_active.S

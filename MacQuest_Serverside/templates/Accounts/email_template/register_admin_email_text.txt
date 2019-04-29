@@ -1,0 +1,6 @@
+There is a new user in MacQuest website.
+New user information:
+Username: {{ username }}
+First name: {{ userFirstName }}
+Last name: {{ userLastName }}
+userType: {{ userType }}

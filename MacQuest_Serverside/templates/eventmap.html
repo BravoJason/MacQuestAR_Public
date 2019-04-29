@@ -1,0 +1,116 @@
+<div id="map-container" class="h-100">
+
+    <div id='map' class="h-100"></div>
+
+    <script>
+        mapboxgl.accessToken = MAPBOX_TOKEN;
+
+
+        var map = new mapboxgl.Map({
+            container: "map",
+            style: MAPBOX_STYLE,
+            zoom: ZOOM_LEVEL_BUILDING,
+            center: [-79.91916660915508, 43.26067233388491],
+            minZoom: 15.4,
+            maxBounds: [[-79.93375671429548, 43.2554624879501],
+                [-79.90754457136283, 43.26924473063363]]
+        });
+    </script>
+
+    <div id='roomBuildingSearch-filter-ctrl'>
+        <div class="form-inline">
+            <div class="dropdown" id="mapDropdownDiv">
+                <input type="text" class="form-control dropdown-toggle" id='roomBuildingSearchBar'
+                       autocomplete="off" data-toggle="dropdown"
+                       placeholder="Building and Room Info" name="q">
+                <ul class="dropdown-menu" id="roomDropdownList">
+                    <li>
+                        Please input building and room number.
+                    </li>
+                </ul>
+            </div>
+            <button type="button" class="btn btn-primary" id="roomBuildingSearchButton">Search</button>
+        </div>
+    </div>
+
+    <div class="btn-group-vertical" id="floorButton">
+    </div>
+</div>
+
+
+<script>
+    let buildingPreKW = "";
+
+    $(document).on('keyup', '#roomBuildingSearchBar', ajaxBuildingList);
+
+    roomDropDownObject = {listObject: $("#roomDropdownList"), itemIndex: 0}
+
+    $("#roomBuildingSearchButton").click(roomDropDownObject, clickItemInList);
+
+    function clickItemInList(event) {
+        if (event.data.listObject.children().length > 0) {
+            (event.data.listObject.children())[event.data.itemIndex].click();
+        }
+    }
+
+    function ajaxBuildingList() {
+        const buildingKW = $("#roomBuildingSearchBar").val();
+
+        //Check whether the input is same.
+        if (buildingPreKW !== buildingKW) {
+            buildingPreKW = buildingKW;
+        }
+        //If the keyword is empty, just return.
+        if (stringIsEmpty(buildingPreKW) === true) {
+            initRoomDropdownList();
+            return;
+        }
+
+
+        const uploadData = {'q': buildingPreKW, 'timestamp': $.now()};
+
+        $.ajax(
+            {
+                type: 'POST',
+                url: '{% url 'buildingSearch' %}',
+                data: uploadData,
+                dataType: 'json',
+            }).done(function (data) {
+            updateBuildingList(data);
+        }).fail(function () {
+            console.log("fail");
+        })
+    }
+
+    //Add event listener to handle the click event on map.
+    map.on("click", function (e) {
+        //When click in the map, get the building room information at click point.
+        var buildingInfo = getClickBuildingInfo(e);
+        setAddSubEventLocation(buildingInfo);
+        var floorInfo = getBuildingFloorInfoArray(buildingInfo);
+
+        setFloorButton(floorInfo);
+
+        if (buildingInfo.zoomLevel >= ZOOM_LEVEL_BUILDING_ROOM_BOUNDARY) {
+            //Highlight Room,
+            cleanHighlightBuilding();
+            cleanHighlightRoom(currentFloor);
+            highlightRoomByClick(e, currentFloor);
+        } else {
+            //Highlight Building.
+            cleanHighlightBuilding();
+            cleanHighlightRoom(currentFloor);
+            highlightBuildingByClick(e);
+        }
+    });
+
+
+    map.on('load', function () {
+        for (let layer in featureLayer) {
+            map.addLayer(featureLayer[layer])
+
+        }
+    });
+
+
+</script>

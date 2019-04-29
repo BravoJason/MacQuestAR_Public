@@ -1,0 +1,34 @@
+.event-active {
+    background-color: lightgreen;
+}
+
+.event-inactive {
+    background: rgba(0, 0, 0, 0.125);
+}
+
+#parent-event-list p {
+    margin-top: 8px;
+    margin-bottom: 8px;
+}
+
+#parent-event-list button {
+    margin-top: 16px;
+    margin-right: 8px;
+}
+
+.add_event_error {
+    margin-top: 8px !important;
+    margin-bottom: 0px !important;
+    word-break: break-all;
+    color: red;
+}
+
+
+
+.parent_event_container input {
+    max-width: 100%;
+}
+
+.parent_event_container textarea{
+    max-width: 100%;
+}

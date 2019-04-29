@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="bus_stop_id_list">
+        <item>2125</item>
+        <item>2126</item>
+        <item>2137</item>
+        <item>2138</item>
+        <item>2145</item>
+        <item>2185</item>
+        <item>2189</item>
+        <item>2190</item>
+        <item>2661</item>
+        <item>2664</item>
+        <item>355277</item>
+    </string-array>
+
+    <string-array
+        name="building_name_abbr_list">
+        <item>HGTL@40$POINT(-79.9226092760734 43.2612804213016)</item>
+        <item>IAHS@83$POINT(-79.9209070877798 43.2595553954349)</item>
+        <item>Mohawk@83$POINT(-79.9209070877798 43.2595553954349)</item>
+        <item>MML@14$POINT(-79.9177167939495 43.2623999634474)</item>
+        <item>ABB@25$POINT(-79.9215943625 43.26051761432)</item>
+        <item>AMH@31$POINT(-79.919640775 43.26396935311)</item>
+        <item>BSB@51$POINT(-79.9205531294064 43.2620402662442)</item>
+        <item>C@16$POINT(-79.9194989597133 43.2653844628388)</item>
+        <item>CNH@23$POINT(-79.9184250801269 43.2641010681723)</item>
+        <item>CRL@71$POINT(-79.9192843026033 43.2592947560495)</item>
+        <item>DBAC@47$POINT(-79.9163778125 43.26509446324)</item>
+        <item>DSB@60$POINT(-79.916502293317 43.263797667544)</item>
+        <item>CUC@78$POINT(-79.9222895811398 43.2617579247769)</item>
+        <item>GH@44$POINT(-79.9182859137396 43.2635518885034)</item>
+        <item>GSB@49$POINT(-79.9212067875 43.26234458111)</item>
+        <item>HH@17$POINT(-79.920175 43.26318367065)</item>
+        <item>ITB@59$POINT(-79.9210585307877 43.2585205516271)</item>
+        <item>IWC@10$POINT(-79.9158568540784 43.265767320529)</item>
+        <item>JHE@5$POINT(-79.920537030475 43.2603132246337)</item>
+        <item>KTH@15$POINT(-79.9171954973027 43.2639575944282)</item>
+        <item>LS@39$POINT(-79.918003621785 43.2609963472433)</item>
+
+        <item>DC@48$POINT(-79.9181690375 43.26186019233)</item>
+
+        <item>MKR@21$POINT(-79.9226628125 43.26239034992)</item>
+
+        <item>MDCL@66$POINT(-79.9168596625 43.2610859251)</item>
+        <item>MUSC@73$POINT(-79.9172742683917 43.2633138543038)</item>
+        <item>PC@33$POINT(-79.9194559724462 43.2598409627039)</item>
+        <item>RJS@19$POINT(-79.9174057464715 43.2667240664171)</item>
+        <item>TSH@35$POINT(-79.9175232255484 43.2644491867967)</item>
+        <item>UH@82$POINT(-79.919200825 43.26343539526)</item>
+        <item>T13@74$POINT(-79.9195412624998 43.258866982949)</item>
+        <item>T29@29$POINT(-79.9183973903345 43.2653464434875)</item>
+        <item>T28@38$POINT(-79.9178485892635 43.2653662796708)</item>
+
+        <!--Refectory, Alum house, Divinity college, Greenhouse, Campus services bldg, applied dynamics, -->
+        <item>REF@58$POINT(-79.9212015 43.2629167)</item>
+        <item>AH@69$POINT(-79.9230084875 43.26516311335)</item>
+
+        <item>GHS@54$POINT(-79.92069875 43.26301585367)</item>
+
+        <item>ETB@28$POINT(-79.9201278625 43.25851132041)</item>
+
+        <item>LRW@88$POINT(-79.9172001 43.2616671)</item>
+        <item>ADL@89$POINT(-79.9275032 43.2632346)</item>
+        <item>CSB@90$POINT(-79.9275843 43.2617682)</item>
+
+    </string-array>
+
+    <string-array
+        name="building_name_full_list">
+        <item>HG Thode Library of Science and Engineering@40$POINT(-79.9226092760734 43.2612804213016)</item>
+        <item>Mohawk/McMaster Institute for Applied Health Sciences@83$POINT(-79.9209070877798 43.2595553954349)</item>
+        <item>Mills Memorial Library@14$POINT(-79.9177167939495 43.2623999634474)</item>
+        <item>AN Bourns Science Building@25$POINT(-79.9215943625 43.26051761432)</item>
+        <item>Alumni Memorial Hall@31$POINT(-79.919640775 43.26396935311)</item>
+        <item>Burke Science Building@51$POINT(-79.9205531294064 43.2620402662442)</item>
+        <item>Commons Building@16$POINT(-79.9194989597133 43.2653844628388)</item>
+        <item>Chester New Hall@23$POINT(-79.9184250801269 43.2641010681723)</item>
+        <item>Communications Research Laboratory@71$POINT(-79.9192843026033 43.2592947560495)</item>
+        <item>David Braley Athletic Centre@47$POINT(-79.9163778125 43.26509446324)</item>
+        <item>DeGroote School of Business@60$POINT(-79.916502293317 43.263797667544)</item>
+        <item>ET Clarke Centre@78$POINT(-79.9222895811398 43.2617579247769)</item>
+        <item>Gilmour Hall@44$POINT(-79.9182859137396 43.2635518885034)</item>
+        <item>General Sciences Building@49$POINT(-79.9212067875 43.26234458111)</item>
+        <item>Hamilton Hall@17$POINT(-79.920175 43.26318367065)</item>
+        <item>Information Technology Building@59$POINT(-79.9210585307877 43.2585205516271)</item>
+        <item>Ivor Wynne Centre@10$POINT(-79.9158568540784 43.265767320529)</item>
+        <item>John Hodgins Engineering Building@5$POINT(-79.920537030475 43.2603132246337)</item>
+        <item>Kenneth Taylor Hall@15$POINT(-79.9171954973027 43.2639575944282)</item>
+        <item>Life Sciences Building@39$POINT(-79.918003621785 43.2609963472433)</item>
+        <item>Michael G DeGroote Centre for Learning and Discovery@66$POINT(-79.9168596625 43.2610859251)</item>
+        <item>McMaster University Student Centre@73$POINT(-79.9172742683917 43.2633138543038)</item>
+        <item>Psychology Building@33$POINT(-79.9194559724462 43.2598409627039)</item>
+        <item>Ron Joyce Stadium@19$POINT(-79.9174057464715 43.2667240664171)</item>
+        <item>Togo Salmon Hall@35$POINT(-79.9175232255484 43.2644491867967)</item>
+        <item>University Hall@82$POINT(-79.919200825 43.26343539526)</item>
+        <item>Building T-13@74$POINT(-79.9195412624998 43.258866982949)</item>
+        <item>Building T-29@29$POINT(-79.9183973903345 43.2653464434875)</item>
+        <item>Building T-28@38$POINT(-79.9178485892635 43.2653662796708)</item>
+
+
+        <item>Mary E. Keyes Residence@21$POINT(-79.9226628125 43.26239034992)</item>
+
+        <!--still need to add the refectory, alumni house, and a few other buildings -->
+
+        <item>Refectory@58$POINT(-79.9212015 43.2629167)</item>
+        <item>Alumni House@69$POINT(-79.9230084875 43.26516311335)</item>
+        <item>Divinity College@48$POINT(-79.9181690375 43.26186019233)</item>
+        <item>Green House@54$POINT(-79.92069875 43.26301585367)</item>
+        <item>Engineering Technology Building@28$POINT(-79.9201278625 43.25851132041)</item>
+
+        <item>L.R Wilson Hall@88$POINT(-79.9172001 43.2616671)</item>
+        <item>Applied Dynamics Building@89$POINT(-79.9275032 43.2632346)</item>
+        <item>Campus Services Building@90$POINT(-79.9275843 43.2617682)</item>
+
+
+
+    </string-array>
+
+</resources>

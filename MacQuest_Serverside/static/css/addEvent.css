@@ -1,0 +1,23 @@
+.add-event-block {
+    margin-top: 5px;
+}
+
+#new-parent-event-name, #new-parent-event-description {
+    max-width: 200px;
+}
+
+#input-email-add{
+    margin-left: 10px;
+}
+
+.email-error{
+    color: red;
+}
+
+.center {
+  width: auto;
+  display: table;
+  margin-left: auto;
+  margin-right: auto;
+}
+

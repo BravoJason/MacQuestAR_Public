@@ -1,0 +1,39 @@
+#roomBuildingSearch-filter-ctrl {
+    position: absolute;
+    top: 10px;
+    left: 20px;
+    z-index: 1;
+    max-width: 100%;
+}
+
+#floorButton {
+    position: absolute;
+    top: 10px;
+    right: 20px;
+    z-index: 1;
+}
+
+#heatmap-time-block {
+    position: absolute;
+    top: 10px;
+    left: 20px;
+    z-index: 1;
+    width: 100%;
+
+}
+
+.heatmap-time-class{
+    margin: 6px;
+}
+
+#eventSearchBar{
+    max-width: 100%;
+}
+
+#active-parent-event{
+    max-width: 100%;
+}
+
+
+
+

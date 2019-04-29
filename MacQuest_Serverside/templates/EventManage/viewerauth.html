@@ -1,0 +1,210 @@
+{% extends "index.html" %}
+{% block mainBody %}
+    <div class="container">
+        <h2>Event viewer request</h2>
+        <div class=" pre-scrollable">
+            <table class="table">
+                <thead>
+                <tr>
+                    <th>Event name</th>
+                    <th>Owner</th>
+                    <th>Current status</th>
+                    <th>Action</th>
+                </tr>
+                </thead>
+                <tbody id="table-body">
+
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <script>
+        $(function () {
+            let param = {};
+            loadParentEventPermissionInfo(param)
+
+
+        });
+
+        function loadParentEventPermissionInfo(param) {
+            $.ajax(
+                {
+                    type: 'POST',
+                    url: '{% url 'EventManage:ajaxGetViewerPermissionInfo' %}',
+                    data: param,
+                    dataType: 'json',
+                }).done(function (data) {
+                setEventPermissionTable(data)
+
+            }).fail(function () {
+                console.log("fail");
+            })
+        }
+
+        function checkHasData(dataObj) {
+            let status = false;
+            if (dataObj.list.viewerInfo.length > 0) {
+                status = true;
+
+            }
+            if (dataObj.list.waitingInfo.length > 0) {
+                status = true;
+            }
+
+            if (dataObj.list.appliableInfo.length > 0) {
+                status = true;
+            }
+            return status
+        }
+
+        function setEventPermissionTable(data) {
+            let dataObj = JSON.parse(data);
+            if (checkHasData(dataObj) === true) {
+                console.log(dataObj);
+                setEventList(dataObj)
+            }
+        }
+
+
+        function setEventList(dataObj) {
+            let applicableHtmlCode = generateAppliableCode(dataObj);
+            let viewableHtmlCode = generateViewableCode(dataObj);
+            let waitingHtmlCode = generateWaitingPermissionCode(dataObj);
+            let htmlCode = applicableHtmlCode + waitingHtmlCode + viewableHtmlCode;
+
+
+            $("#table-body").html(htmlCode)
+        }
+
+        function generateAppliableCode(dataObj) {
+            let htmlCode = "";
+            let appliableEvent = dataObj.list.appliableInfo;
+            for (let appliableEventIndex in appliableEvent) {
+                let event = appliableEvent[appliableEventIndex]
+                htmlCode +=
+                    `
+                        <tr>
+                            <td>
+                                ${event.eventName}
+                            </td>
+                            <td>
+                                ${event.ownerInfo.ownerFirstName} ${event.ownerInfo.ownerLastName}
+                            </td>
+                            <td>
+                                Wait for apply.
+                            </td>
+                            <td>
+                                <button  class="btn btn-primary" onclick="applyPermission(${event.id})" >Apply</button>
+                            </td>
+                        </tr>`
+            }
+            return htmlCode;
+        }
+
+        function generateWaitingPermissionCode(dataObj) {
+            let htmlCode = "";
+            let waitingEvent = dataObj.list.waitingInfo;
+            for (let index in waitingEvent) {
+                let event = waitingEvent[index]
+                htmlCode +=
+                    `
+                        <tr>
+                            <td>
+                                ${event.eventName}
+                            </td>
+                            <td>
+                                ${event.ownerInfo.ownerFirstName} ${event.ownerInfo.ownerLastName}
+                            </td>
+                            <td>
+                                Wait for permission.
+                            </td>
+                            <td>
+                                <button class="btn btn-primary" onclick="removeFromWaitingList(${event.id})">Cancel</button>
+                            </td>
+                        </tr>`
+            }
+            return htmlCode;
+        }
+
+        function generateViewableCode(dataObj) {
+            let htmlCode = "";
+            let viewerEvent = dataObj.list.viewerInfo;
+            for (let index in viewerEvent) {
+                let event = viewerEvent[index]
+                htmlCode +=
+                    `
+                        <tr>
+                            <td>
+                                ${event.eventName}
+                            </td>
+                            <td>
+                                ${event.ownerInfo.ownerFirstName} ${event.ownerInfo.ownerLastName}
+                            </td>
+                            <td>
+                                Already get permission.
+                            </td>
+                            <td>
+                                <button class="btn btn-primary" onclick="removeFromViewerList(${event.id})">Disable</button>
+                            </td>
+                        </tr>`
+            }
+            return htmlCode;
+
+        }
+
+        function applyPermission(pid) {
+            let param = {"pid": pid};
+            $.ajax(
+                {
+                    type: 'POST',
+                    url: '{% url 'EventManage:ajaxApplyPrivatePermission' %}',
+                    data: param,
+                    dataType: 'json',
+                }).done(function (data) {
+                console.log(data);
+                loadParentEventPermissionInfo({});
+            }).fail(function () {
+                loadParentEventPermissionInfo({});
+                console.log("fail");
+            })
+        }
+
+        function removeFromWaitingList(pid) {
+            let param = {"pid": pid};
+            $.ajax(
+                {
+                    type: 'POST',
+                    url: '{% url 'EventManage:ajaxCancelPrivatePermissionApply' %}',
+                    data: param,
+                    dataType: 'json',
+                }).done(function (data) {
+                console.log(data);
+                loadParentEventPermissionInfo({});
+            }).fail(function () {
+                loadParentEventPermissionInfo({});
+                console.log("fail");
+            })
+
+        }
+
+        function removeFromViewerList(pid) {
+            let param = {"pid": pid};
+            $.ajax(
+                {
+                    type: 'POST',
+                    url: '{% url 'EventManage:ajaxCancelViewerPermission' %}',
+                    data: param,
+                    dataType: 'json',
+                }).done(function (data) {
+                console.log(data);
+                loadParentEventPermissionInfo({});
+            }).fail(function () {
+                loadParentEventPermissionInfo({});
+                console.log("fail");
+            })
+
+        }
+    </script>
+
+{% endblock %}

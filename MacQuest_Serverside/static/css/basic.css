@@ -1,0 +1,25 @@
+html, body {
+    height: 100%
+}
+
+#navBar {
+    height: 10%;
+}
+
+#mainBody, #mainBodyRow, #map, #heatmap {
+    height: 70%
+}
+
+.bg-brown{
+    background-color:brown;
+}
+
+.text-white{
+    color: white;
+}
+
+.bg-white{
+    background-color: white;
+}
+
+

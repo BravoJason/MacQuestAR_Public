@@ -1,0 +1,52 @@
+/*web background*/
+.form-container {
+    display: table;
+    height: 70%;
+
+}
+
+.form-container .row {
+    display: table-cell;
+    vertical-align: middle;
+}
+
+/* centered columns styles */
+.form-container .row-centered {
+    text-align: center;
+
+}
+
+.form-container .col-centered {
+    display: inline-block;
+    float: none;
+    text-align: left;
+    margin-right: -4px;
+    border: solid brown;
+    padding: 15px;
+}
+
+.form-container h3 {
+    text-align: center;
+    margin-top: 16px;
+    margin-bottom: 32px;
+}
+
+.block {
+    max-width: 100%;
+    display: block;
+    margin: auto;
+    text-align: center;
+}
+
+label {
+    max-width: 100%;
+    text-align: right;
+}
+
+input, textarea {
+    vertical-align: top;
+}
+
+.errorlist{
+    color:red;
+}

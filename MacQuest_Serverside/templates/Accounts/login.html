@@ -1,0 +1,38 @@
+{% extends "index.html" %}
+
+{% block mainBody %}
+    <div class="container form-container">
+        <div class="row row-centered">
+            <div class="col-md-6 col-centered">
+                <h3>Login</h3>
+                <form class="form-group" role="form" action="{% url 'Accounts:login' %}" method="post">
+                    {% csrf_token %}
+                    {{ form.non_field_errors }}
+                    {% for field in form %}
+                        <div class="block">
+                            {{ field.label_tag }}
+                            {{ field }}
+                        </div>
+                        {{ field.errors }}
+                        {% if field.help_text %}
+                            <p class="help text-small text-muted">{{ field.help_text|safe }}</p>
+                        {% endif %}
+                        <br>
+                    {% endfor %}
+                    <div class="text-center" role="group">
+                        <button type="submit" class="btn btn-primary">Login</button>
+                    </div>
+                    <input type="hidden" name="next" value="{% url "index" %}"/>
+                </form>
+
+
+                <div class="text-center" role="group">
+                    <span>New account?<a href="{% url 'Accounts:register' %}">Register</a></span>
+                </div>
+                <div class="text-center" role="group"><span><a href="{% url "Accounts:password_reset" %}">Forget your password.</a></span>
+                </div>
+
+            </div>
+        </div>
+    </div>
+{% endblock %}

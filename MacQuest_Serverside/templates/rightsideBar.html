@@ -1,0 +1,294 @@
+{% load staticfiles %}
+{% block rightBar %}
+    <div id="eventSearch-filter-ctrl" class="h-100">
+
+        <div class="card" id="search-option-card">
+            <div class="card-header">
+                <a class="collapsed card-link" data-toggle="collapse" href="#SearchOption">Search option</a>
+            </div>
+            <div id="SearchOption" class="collapse show" data-parent="#search-option-card">
+                <div class="card-body">
+                    <form method="post" class="form-inline">
+                        {% csrf_token %}
+                        <p>Event name:</p>
+                        <input type="text" class="form-control" id='eventSearchBar'
+                               autocomplete="off" name="q" placeholder="Event Name">
+
+
+                        <p>Which kind of event you want to search?</p>
+                        <select class="form-control" id="active-parent-event">
+                            <option value="all-event">All parent events.</option>
+                            <option value="active-event">All active parent events.</option>
+                        </select>
+
+                    </form>
+
+                    <button type="button" class="btn btn-outline-primary" id="search-parent-event"
+                            onclick="searchParentEvent()">Search
+                    </button>
+
+                    {% if user.is_authenticated and perms.Accounts.create_event %}
+
+                        <button type="button" class="btn btn-outline-primary" id="search-parent-event"
+                                onclick="checkAllMyEvent()">Check all my events
+                        </button>
+
+                    {% endif %}
+
+
+                </div>
+            </div>
+        </div>
+
+        {% if user.is_authenticated and perms.Accounts.create_event %}
+            <div class="btn-group-vertical btn-group-justified">
+                <button type="button" onclick="location.href='{% url "EventManage:addEvent" %}'"
+                        class="btn btn-default event-button">Add event
+                </button>
+            </div>
+        {% endif %}
+
+
+
+        <div id="parent-event-list">
+        </div>
+
+
+    </div>
+    <script type="text/javascript" language="javascript" src="{% static "js/eventsearch.js" %}"></script>
+    <script type="text/javascript" language="javascript" src="{% static "js/eventmanage.js" %}"></script>
+
+
+
+    <script>
+        let g_CurrentParentEventSearchParam = "";
+        let g_CurrentSubEventSearchParam = "";
+
+
+        function generateAddSubEventButton(parentEventOwner, parentEventID) {
+
+            let HTMLCode = "";
+
+            {% if user.is_authenticated and perms.Accounts.create_event  %}
+                if (isEventOwner(parentEventOwner) === true) {
+                    HTMLCode += `<button type="button" class="btn btn-outline-primary" id="search-parent-event" onclick="addSubEvent(${parentEventID})">
+Add sub event</button>`
+                }
+            {% endif %}
+
+            return HTMLCode
+        }
+
+        //Function to load event list.
+        $(function () {
+            let param = {};
+            {% if user.is_authenticated and perms.Accounts.create_event %}
+                param.owner = "{{  user.username }}";
+            {% else %}
+                param.isActive = true;
+                param.authentication = "Public";
+            {% endif  %}
+
+            searchParentEventByParam(param)
+        });
+
+
+        function searchParentEventByParam(param) {
+            g_CurrentParentEventSearchParam = param;
+            $.ajax(
+                {
+                    type: 'POST',
+                    url: '{% url 'EventManage:searchParentEventByParam' %}',
+                    data: param,
+                    dataType: 'json',
+                }).done(function (data) {
+                removeAllMarkers();
+                setActivePublicParentEventList(data)
+            }).fail(function () {
+                console.log("fail");
+            })
+        }
+
+        function searchParentEventByID(param) {
+            $.ajax(
+                {
+                    type: 'POST',
+                    url: '{% url 'EventManage:searchParentEventByParam' %}',
+                    data: param,
+                    dataType: 'json',
+                }).done(function (data) {
+                setActivePublicParentEventList(data)
+            }).fail(function () {
+                console.log("fail");
+            })
+        }
+
+        function checkAllMyEvent() {
+            let param = {'owner': "{{ user.username }}"}
+            searchParentEventByParam(param)
+        }
+
+
+        function uploadSubEvent(param) {
+            $.ajax(
+                {
+                    type: "POST",
+                    url: '{% url "EventManage:addSubEvent" %}',
+                    data: param,
+                    dateType: "json",
+
+                }).done(function (data) {
+                handleAddSubEventAjaxReturn(data);
+            }).fail(function () {
+                console.log("fail");
+            })
+        }
+
+        function searchSubEventByParam(param, pid) {
+            g_CurrentSubEventSearchParam = {"param": param, "pid": pid};
+            $.ajax({
+                type: "POST",
+                url: "{% url "EventManage:searchSubEventByParam" %}",
+                data: param,
+                dataType: "json",
+            }).done(function (data) {
+                generateSubEventCode(data, pid);
+                console.log(data);
+            }).fail(function () {
+                console.log("searchSubEvent fail.");
+            });
+        }
+
+        function searchSubEventByPID(pid) {
+            let param = {"pid": pid};
+            $.ajax({
+                type: "POST",
+                url: "{% url "EventManage:searchSubEventByParam" %}",
+                data: param,
+                dataType: "json",
+            }).done(function (data) {
+                generateSubEventCode(data, pid);
+                console.log(data);
+            }).fail(function () {
+                console.log("searchSubEvent fail.");
+            });
+        }
+
+        function deleteParentEvent(pid) {
+            let param = {"pid": pid}
+            $.ajax({
+                type: "POST",
+                url: "{% url "EventManage:deleteParentEvent" %}",
+                data: param,
+                dataType: "json",
+            }).done(function (data) {
+                let dataObj = JSON.parse(data);
+                showMessageDialog(dataObj);
+                cleanCurrentViewParentEventID();
+                searchParentEventByParam(g_CurrentParentEventSearchParam);
+
+
+            }).fail(function () {
+                let message = {};
+                message.title = "Connection";
+                message.info = "Delete parent event connection error.";
+                showMessageDialog(message);
+            });
+        }
+
+        function deleteSubEvent(sid, pid) {
+            param = {"sid": sid};
+            $.ajax({
+                type: "POST",
+                url: "{% url "EventManage:deleteSubEvent" %}",
+                data: param,
+                dataType: "json",
+            }).done(function (data) {
+                let dataObj = JSON.parse(data);
+                searchSubEventByPID(pid);
+                cleanCurrentViewSubEventID();
+                //searchParentEventByParam(g_CurrentParentEventSearchParam);
+                showMessageDialog(dataObj);
+                //searchParentEventByParam(g_CurrentParentEventSearchParam);
+            }).fail(function () {
+                let message = {};
+                message.title = "Connection";
+                message.info = "Delete subevent connection error.";
+                showMessageDialog(message);
+            });
+
+        }
+
+
+        function generateDeleteParentEventButton(parentEventOwner, parentEventID) {
+            let eventOwner_ = String("{{ user.username }}");
+            let HTMLCode = "";
+
+            {% if user.is_authenticated and perms.Accounts.create_event  %}
+                if (parentEventOwner === eventOwner_) {
+                    HTMLCode = `<button type="button" class="btn btn-outline-primary" id="search-parent-event" onclick="comfirmDeleteParentEvent(${parentEventID})">
+Delete event</button>`
+                }
+            {% endif %}
+
+            return HTMLCode
+        }
+
+        function isEventOwner(eventOwnerName) {
+            let username = String("{{ user.username }}");
+
+            if (eventOwnerName === username) {
+                return true;
+            } else {
+                return false;
+            }
+        }
+
+        function editParentEvent(pid) {
+            window.location.href = `{% url "EventManage:editParentEvent" %}?pid=${pid}`;
+        }
+
+        function generateSubEventEditButton(sid, owner) {
+            let htmlCode = "";
+            if (isEventOwner(owner) === true) {
+                htmlCode = `<button type="button" class="btn btn-outline-primary" id="search-parent-event" onclick="editSubEvent(${sid})">Edit</button>`
+            }
+
+            return htmlCode;
+
+        }
+
+
+        function uploadEditSubEvent(sid, param) {
+            $.ajax({
+                type: "POST",
+                url: "{% url "EventManage:editSubEvent" %}",
+                data: param,
+                dataType: "json",
+            }).done(function (data) {
+                let dataObj = JSON.parse(data);
+                //searchSubEventByPID(pid);
+                setEditSubEventStatusToDisediable();
+                setCurrentViewSubEventID(sid);
+                showMessageDialog(dataObj);
+                searchParentEventByParam(g_CurrentParentEventSearchParam);
+                //searchParentEventByParam(g_CurrentParentEventSearchParam);
+            }).fail(function (data) {
+                let message = {};
+                message.title = "Error";
+                message.info = "Edit subevent error.";
+                console.log(data);
+                showMessageDialog(message);
+            });
+
+        }
+
+
+    </script>
+
+    <div id="qrcode"></div>
+
+
+{% endblock %}
+
+

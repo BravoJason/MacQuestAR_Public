@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#990033</color>
+    <color name="colorPrimaryDark">#660022</color>
+    <color name="colorPrimaryLight">#cf445c</color>
+    <color name="colorAccent">#CCCCCC</color>
+    <color name="colorYellow">#FFCC33</color>
+    <color name="colorBlue">#003399</color>
+    <color name="colorWhite">#FFFFFF</color>
+    <color name="colorBlack">#000000</color>
+    <color name="black_hehe">#8e8e8e</color>
+    <color name="colorGreen">#a4c639</color>
+    <color name="updataversionbut">#00c3e8</color>
+    <color name="visitedEvent">#CCCCCC</color>
+    <color name="eventItem_0">#F08080</color>
+    <color name="eventItem_1">#00000000</color>
+</resources>

@@ -1,0 +1,1 @@
+This is the folder for saving building index data for Whoosh. The folder must be existed.

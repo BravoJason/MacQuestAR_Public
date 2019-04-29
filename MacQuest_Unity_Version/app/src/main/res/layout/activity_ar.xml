@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:mapbox="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.mcmaster.wiser.idyll.view.ARActivity">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <RelativeLayout
+            xmlns:tools="http://schemas.android.com/tools"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:id="@+id/scan"
+            android:visibility="visible"
+            >
+        </RelativeLayout>
+
+        <android.support.v7.widget.CardView
+            xmlns:card_view="http://schemas.android.com/apk/res-auto"
+            android:id="@+id/card_view"
+            android:layout_width="150dp"
+            android:layout_height="150dp"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentRight="true"
+            android:layout_gravity="center"
+            android:layout_margin="10dp"
+            card_view:cardBackgroundColor="@color/colorPrimary"
+            android:backgroundTint="@color/colorPrimary"
+            android:alpha="0.75"
+            card_view:cardCornerRadius="12dp"
+            card_view:cardElevation="4dp"
+            card_view:contentPadding="8dp"
+            card_view:cardPreventCornerOverlap="true"
+            card_view:layout_constraintEnd_toEndOf="parent"
+            card_view:layout_constraintStart_toStartOf="parent"
+            card_view:layout_constraintBottom_toTopOf="parent">
+            <!--<LinearLayout-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="match_parent"-->
+            <!--android:id="@+id/linear1"-->
+            <!--android:orientation="vertical">-->
+
+            <!--</LinearLayout>-->
+        </android.support.v7.widget.CardView>
+
+
+
+        <android.support.v7.widget.CardView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="8dp"
+            android:orientation="vertical"
+            app:cardCornerRadius="12dp"
+            app:cardBackgroundColor="@color/colorPrimary"
+            android:alpha="0.75"
+            app:contentPadding="4dp"
+            app:cardElevation="12dp">
+
+            <Button
+                android:id="@+id/close_ar"
+                android:layout_width="wrap_content"
+                android:layout_height="45dp"
+                android:layout_alignParentLeft="true"
+                android:background="@color/colorPrimary"
+                android:alpha="0.75"
+                android:text="Close AR"
+                android:textColor="@color/colorWhite"
+                android:visibility="gone" />
+
+        </android.support.v7.widget.CardView>
+
+        <android.support.v7.widget.CardView
+            android:id="@+id/scan_qr_card_view"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="8dp"
+            android:orientation="vertical"
+            android:layout_alignParentRight="true"
+            app:cardCornerRadius="12dp"
+            app:cardBackgroundColor="@color/colorPrimary"
+            android:alpha="0.75"
+            app:contentPadding="4dp"
+            app:cardElevation="12dp">
+
+            <Button
+                android:id="@+id/scan_qr"
+                android:layout_width="wrap_content"
+                android:layout_height="45dp"
+                android:background="@color/colorPrimary"
+                android:alpha="0.75"
+                android:text="Scan QR"
+                android:textColor="@color/colorWhite"
+                android:visibility="visible" />
+
+        </android.support.v7.widget.CardView>
+
+        <android.support.v7.widget.CardView
+            android:id="@+id/pitch_text_view"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="8dp"
+            android:orientation="vertical"
+            android:layout_below="@id/scan_qr_card_view"
+            android:layout_centerInParent="true"
+            app:cardCornerRadius="12dp"
+            app:cardBackgroundColor="@color/colorPrimary"
+            android:alpha="0.6"
+            app:contentPadding="4dp"
+            app:cardElevation="12dp"
+            android:visibility="gone">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:alpha="0.6"
+                android:text="@string/text_recalibration_prompt"
+                android:textColor="@color/colorWhite"/>
+        </android.support.v7.widget.CardView>
+
+
+
+    </RelativeLayout>
+
+</android.support.constraint.ConstraintLayout>

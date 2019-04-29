@@ -1,0 +1,31 @@
+﻿<Properties StartupConfiguration="{018F1FCA-E537-F52B-9111-1352876F14E7}|">
+  <MonoDevelop.Ide.ItemProperties.Assembly-CSharp PreferredExecutionTarget="Unity.Editor" />
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Scripts/TrackerControler.cs">
+    <Files>
+      <File FileName="Assets/Scripts/QRScanner.cs" Line="308" Column="38" />
+      <File FileName="Assets/Scripts/toolsLib.cs" Line="56" Column="57" />
+      <File FileName="Assets/Scripts/TrackerControler.cs" Line="10" Column="7" />
+      <File FileName="Assets/Scripts/TrackerControl.cs" Line="1" Column="1" />
+      <File FileName="Assets/Scripts/navCreator.cs" Line="1" Column="1" />
+      <File FileName="Assets/Scripts/navCreatorGround.cs" Line="1" Column="1" />
+      <File FileName="Assets/Scripts/navCreatorGroundV2.cs" Line="1" Column="1" />
+      <File FileName="Assets/Scripts/navCreatorNoGround.cs" Line="1" Column="1" />
+      <File FileName="Assets/Scripts/SupportedDevices.cs" Line="1" Column="1" />
+      <File FileName="Assets/Scripts/headingControl.cs" Line="1" Column="1" />
+      <File FileName="Assets/Scripts/labelCreator.cs" Line="21" Column="14" />
+      <File FileName="Assets/Scripts/LabelMaker.cs" Line="332" Column="18" />
+    </Files>
+  </MonoDevelop.Ide.Workbench>
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
+  <MonoDevelop.Ide.DebuggingService.Breakpoints>
+    <BreakpointStore>
+      <Breakpoint file="/Users/Zerone_Jia/MacQuestAR_NewServer/MacQuest_AR_WithGroundPlane/Assets/Scripts/QRScanner.cs" relfile="Assets/Scripts/QRScanner.cs" line="267" column="1" />
+      <Breakpoint file="/Users/Zerone_Jia/MacQuestAR_NewServer/MacQuest_AR_WithGroundPlane/Assets/Scripts/QRScanner.cs" relfile="Assets/Scripts/QRScanner.cs" line="272" column="1" />
+      <Breakpoint file="/Users/Zerone_Jia/MacQuestAR_NewServer/MacQuest_AR_WithGroundPlane/Assets/Scripts/QRScanner.cs" relfile="Assets/Scripts/QRScanner.cs" line="318" column="1" />
+      <Breakpoint file="/Users/Zerone_Jia/MacQuestAR_NewServer/MacQuest_AR_WithGroundPlane/Assets/Scripts/QRScanner.cs" relfile="Assets/Scripts/QRScanner.cs" line="338" column="1" />
+      <Breakpoint file="/Users/Zerone_Jia/MacQuestAR_NewServer/MacQuest_AR_WithGroundPlane/Assets/Scripts/toolsLib.cs" relfile="Assets/Scripts/toolsLib.cs" line="69" column="1" />
+    </BreakpointStore>
+  </MonoDevelop.Ide.DebuggingService.Breakpoints>
+  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
+  <MultiItemStartupConfigurations />
+</Properties>

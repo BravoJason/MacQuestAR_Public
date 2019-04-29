@@ -1,0 +1,17 @@
+{% block mainBody %}
+    <div class="container-fluid h-75" id="mainBody">
+        <div class="row h-100" id="mainBodyRow">
+            <div class="col-md-4 h-100">
+                {% block rightBar %}
+                    {% include "rightsideBar.html" %}
+                {% endblock %}
+            </div>
+
+            <div class="col-md-8 h-100">
+                {% block mainArea %}
+                    {% include "mainMap.html" %}
+                {% endblock %}
+            </div>
+        </div>
+    </div>
+{% endblock %}

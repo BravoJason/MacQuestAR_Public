@@ -1,0 +1,168 @@
+{% extends "index.html" %}
+{% block mainBody %}
+
+    <div class="container form-container">
+        <div class="row row-centered">
+            <div class="col-md-6 col-centered">
+                <h3 class="text-center">Edit parent event.</h3>
+                <form class="form-group" method="post" action="">
+                    {% csrf_token %}
+
+                    <div class='add-event-block'>
+                        <label for="id_name" class="col-sm-4">Name:</label>
+                        <input type="text" class="col-sm-5" name="name" maxlength="100" required
+                               id="id_name" value="{{ parentEvent.name }}">
+
+                    </div>
+                    <div class='add-event-block'>
+                        <label for="id_description" class="col-sm-4">Description:</label>
+                        <textarea name="description" class="col-sm-5" cols="40" rows="2" maxlength="255" required
+                                  id="id_description">{{ parentEvent.description }}</textarea>
+                    </div>
+
+
+                    <div class='add-event-block'>
+                        <label for="id_authentication" class="col-sm-4">Authentication:</label>
+                        <select name="authentication" id="id_authentication" class="col-sm-6">
+                            <option value="Public" id="id_authentication_public">Public</option>
+                            <option value="Private" id="id_authentication_private">Private</option>
+                        </select>
+                    </div>
+                    <div class='add-event-block' id="private-event-password" hidden="hidden">
+                        <label for="id_private_password" class="col-sm-4">Private password:</label>
+                        <input type="text" name="private_password" maxlength="100" id="id_private_password" class="col-sm-5">
+
+                    </div>
+
+                    <div id="email-list-block" hidden="hidden">
+                        <div class="add-event-block">
+                            <label for="input-email" class="col-sm-4">Predefine viewer email:</label>
+                            <input type="email" maxlength="100" placeholder="email" id="input-email" class="col-sm-5">
+                            <button type="button" class="btn btn-primary" id="input-email-add" class="col-sm-2">Add</button>
+                        </div>
+
+                        <p id="email-error-msg" class="text-center email-error"></p>
+
+                        <div class="add-event-block">
+                            <ul class="list-group" name="email-list" id="predefine-email-list">
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="text-center add-event-block" role="group">
+                        <button type="submit" class="btn btn-primary">Submit</button>
+                        <button type="button" class="btn btn-primary" onclick="location.href='{% url 'index' %}'">Go
+                            back
+                        </button>
+                    </div>
+                    <input name="id" value="{{ parentEvent.id }}" hidden>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <script>
+
+     switch ($("#id_authentication").val()) {
+            case "Public":
+                $("#private-event-password").prop("hidden", true);
+                $("#email-list-block").prop("hidden", true);
+                break;
+            case "Private":
+                $("#private-event-password").prop("hidden", false);
+                $("#email-list-block").prop("hidden", false);
+                break;
+        }
+
+        $("#id_authentication").change(function () {
+            switch ($("#id_authentication").val()) {
+                case "Public":
+                    $("#private-event-password").prop("hidden", true);
+                    $("#email-list-block").prop("hidden", true);
+                    break;
+                case "Private":
+                    $("#private-event-password").prop("hidden", false);
+                    $("#email-list-block").prop("hidden", false);
+                    break;
+
+            }
+        });
+
+
+        let emailList = [];
+
+        $("#input-email-add").click(function (e) {
+            let email_val = $("#input-email").val();
+            email_val = email_val.trim();
+            let status = vaildEmail(email_val);
+            if (status === true) {
+                let index = $.inArray(email_val, emailList);
+                if (index === -1) {
+                    addEmailIntoList(email_val);
+                    setEmailInputErrorMessage("");
+                } else {
+                    setEmailInputErrorMessage("The email is already in the email list.");
+                }
+            } else {
+                setEmailInputErrorMessage("Email format is incorrect.");
+
+            }
+
+
+        });
+
+        function addEmailIntoList(email) {
+            emailList.push(email);
+            $("#predefine-email-list").append(
+                `<li class="list-group-item text-center">
+
+                    <span class="predifined-email-li">
+                    ${email}
+                    </span>
+                        <button type="button" class="btn btn-primary float-right" onclick="deleteEmail('${email}')">Delete</button>
+
+                </li>`
+            );
+            updateEmailList();
+        }
+
+        function deleteEmail(element) {
+            let email_elements = $(".predifined-email-li");
+            for (let i = 0; i < email_elements.length; i++) {
+                if (element === email_elements[i].outerText) {
+                    email_elements[i].parentElement.remove()
+                }
+            }
+
+            emailList.splice($.inArray(element, emailList), 1);
+            updateEmailList();
+
+
+        }
+
+        function setEmailInputErrorMessage(error) {
+            $("#email-error-msg").html(error)
+
+
+        }
+
+        function vaildEmail(email) {
+            let reg = /^\w+((-\w+)|(\.\w+))*\@[A-Za-z0-9]+((\.|-)[A-Za-z0-9]+)*\.[A-Za-z0-9]+$/;
+            if (!reg.test(email)) {
+                return false;
+            } else {
+                return true;
+            }
+        }
+
+        function updateEmailList(){
+            let jsonStr = JSON.stringify(emailList);
+            $("#email-list").val(jsonStr);
+        }
+
+
+
+    </script>
+
+{% endblock %}

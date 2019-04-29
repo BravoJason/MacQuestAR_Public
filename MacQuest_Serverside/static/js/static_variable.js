@@ -1,0 +1,14 @@
+let Status_add_sub_event = false;
+let g_location_lat = 0.0;
+let g_location_lng = 0.0;
+let g_location_building = "";
+let g_location_room = "";
+let g_location_floor = 0.0;
+let Status_edit_sub_event = false;
+let g_edit_sub_event_id = -1;
+let g_current_view_parent_event_id = -1;
+let g_current_view_sub_event_id = -1;
+const g_domain = "127.0.0.1:8000";
+const g_HeatMap_URL = "http://" + g_domain + "/eventapi/heatmapLocation";
+const g_Subevent_URL = "http://" + g_domain + "/eventapi/api/subevent/";
+let g_currentPID = 0;

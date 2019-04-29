@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <group
+        android:id="@+id/drawer_group"
+        android:checkableBehavior="single">
+        <item
+            android:id="@+id/nav_map"
+            android:icon="@drawable/ic_place_black_24dp"
+            android:title="@string/map" />
+
+        <item
+            android:id="@+id/nav_nearest_washroom"
+            android:icon="@drawable/ic_wc_black_24dp"
+            android:title="@string/nearest_washroom" />
+        <item
+            android:id="@+id/nav_event"
+            android:icon="@drawable/ic_my_location_24dp"
+            android:title="@string/campus_event" />
+        <item
+            android:id="@+id/scan_qrcode"
+            android:title="@string/scan_qr_code"
+            android:icon="@drawable/ic_my_location_24dp"
+            />
+        <item
+            android:id="@+id/nav_building_directory"
+            android:icon="@drawable/ic_business_black_24dp"
+            android:title="@string/building_directory" />
+
+        <item
+            android:id="@+id/nav_bus_schedule"
+            android:icon="@drawable/ic_directions_bus_black_24dp"
+            android:title="@string/bus_schedule" />
+
+        <item
+            android:id="@+id/nav_emergency_services"
+            android:icon="@drawable/ic_warning_black_24dp"
+            android:title="@string/emergency_services" />
+
+        <item
+            android:id="@+id/nav_about"
+            android:icon="@drawable/ic_info_black_24dp"
+            android:title="@string/about" />
+
+        <item
+            android:id="@+id/nav_download"
+            android:icon="@drawable/ic_file_download_black_24dp"
+            android:title="@string/update_map" />
+
+        <item
+            android:id="@+id/db_update"
+            android:icon="@drawable/ic_file_download_black_24dp"
+            android:title="@string/update_database" />
+
+        <item
+            android:id="@+id/new_version"
+            android:icon="@drawable/ic_info_black_24dp"
+            android:title="@string/new_version"
+            android:visible="false" />
+    </group>
+
+</menu>

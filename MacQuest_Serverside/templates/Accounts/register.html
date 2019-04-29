@@ -1,0 +1,30 @@
+{% extends "index.html" %}
+{% block mainBody %}
+    <div class="container form-container">
+        <div class="row row-centered">
+            <div class="col-md-6 col-centered">
+                <h3 class="text-center">Register</h3>
+                <form class="form-group" role="form" action="{% url 'Accounts:register' %}" method="post">
+                    {% csrf_token %}
+                    {% for field in registerForm %}
+                        <div class="block">
+                            {{ field.label_tag }}
+                            {{ field }}
+                            {{ field.errors }}
+                        </div>
+                        <br>
+                        {% if field.help_text %}
+                            <div class="help text-small text-muted">{{ field.help_text|safe }}</div>
+                        {% endif %}
+                    {% endfor %}
+                    <div class="text-center" role="group">
+                        <button type="submit" class="btn btn-primary">Register</button>
+                        <button type="reset" class="btn btn-primary">Clear</button>
+                    </div>
+                    <input type="hidden" name="next" value="{{ next }}"/>
+
+                </form>
+            </div>
+        </div>
+    </div>
+{% endblock %}

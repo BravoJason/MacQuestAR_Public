@@ -1,0 +1,142 @@
+{% extends "index.html" %}
+{% block mainBody %}
+
+    <div class="container">
+        <h2>Event viewer request</h2>
+        <div class=" pre-scrollable">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>Event name</th>
+                        <th>Viewer</th>
+                        <th>Current status</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody id="table-body">
+
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+
+    <script>
+
+        $(function () {
+            let param = {};
+            loadPermissionAskByParam(param);
+
+        });
+
+        function loadPermissionAskByParam(param) {
+            $.ajax(
+                {
+                    type: 'POST',
+                    url: '{% url 'EventManage:ajaxGetPermission' %}',
+                    data: param,
+                    dataType: 'json',
+                }).done(function (data) {
+                setEventListTable(data)
+            }).fail(function () {
+                console.log("fail");
+            })
+        }
+
+        function checkHasData(dataObj) {
+            let status = false;
+            for (let index in dataObj.list) {
+                if (dataObj.list[index].viewerList.length > 0) {
+                    status = true;
+                }
+                if (dataObj.list[index].waitingList.length > 0) {
+                    status = true;
+                }
+            }
+            return status
+        }
+
+        function setEventListTable(data) {
+            let dataObj = JSON.parse(data);
+            if (checkHasData(dataObj) === false) {
+                $("#table-body").html("<h5>No user request permission.</h5>")
+            } else {
+                setEventList(dataObj)
+            }
+
+        }
+
+        function setEventList(dataObj) {
+            let htmlCode = "";
+            for (let eventIndex in dataObj.list) {
+                let eventInfo = dataObj.list[eventIndex];
+
+                for (let waitingIndex in eventInfo.waitingList) {
+                    let waiting = eventInfo.waitingList[waitingIndex];
+                    htmlCode +=
+                        `
+                            <tr>
+                                <td>${eventInfo.eventName}</td>
+                                <td>${waiting.firstName} ${waiting.lastName}</td>
+                                <td>Wait for your response.</td>
+                                <td><button onclick="acceptPermission(${eventInfo.eventID}, ${waiting.id})" class="btn btn-primary">Accept</button></td>
+                            </tr>
+                        `
+
+                }
+
+                for (let viewerIndex in eventInfo.viewerList) {
+                    let viewer = eventInfo.viewerList[viewerIndex];
+                    htmlCode +=
+                        `
+                            <tr>
+                                <td>${eventInfo.eventName}</td>
+                                <td>${viewer.firstName} ${viewer.lastName}</td>
+                                <td>Accepted</td>
+                                <td><button onclick="cancelPermission(${eventInfo.eventID} ,${viewer.id})" class="btn btn-primary">Cancel</button></td>
+                            </tr>
+                        `
+                }
+
+
+            }
+            $("#table-body").html(htmlCode)
+        }
+
+        function acceptPermission(event_id, user_id) {
+            let param = {"event_id": event_id, "user_id": user_id};
+            $.ajax(
+                {
+                    type: 'POST',
+                    url: '{% url 'EventManage:accpetPermission' %}',
+                    data: param,
+                    dataType: 'json',
+                }).done(function (data) {
+                console.log(data);
+                loadPermissionAskByParam({});
+            }).fail(function () {
+                loadPermissionAskByParam({});
+                console.log("Accept permission failed.");
+
+            })
+        }
+
+        function cancelPermission(event_id, user_id) {
+            let param = {"event_id": event_id, "user_id": user_id};
+            $.ajax(
+                {
+                    type: 'POST',
+                    url: '{% url 'EventManage:cancelPermission' %}',
+                    data: param,
+                    dataType: 'json',
+                }).done(function (data) {
+                console.log(data);
+                loadPermissionAskByParam({});
+            }).fail(function (data) {
+                loadPermissionAskByParam({});
+                console.log("Cancel permission failed.");
+
+            })
+        }
+    </script>
+{% endblock %}

@@ -1,0 +1,151 @@
+<div id='heatmap' class="h-100" hidden></div>
+<div id='heatmap-time-block' hidden>
+    <form method="post" class="form-inline">
+        <div class="heatmap-time-class">
+            <input type="datetime-local" class="form-control" id="heatmap-start-time" placeholder="Start time">
+        </div>
+        <div class="heatmap-time-class">
+            <input type="datetime-local" class="form-control" id="heatmap-end-time" placeholder="End time">
+        </div>
+        <div class="heatmap-time-class">
+            <button type="button" class="btn btn-primary" id="heatmap_search" onclick="searchHeatMapUserLocation()">
+                Search
+            </button>
+        </div>
+
+
+    </form>
+</div>
+
+<script>
+
+    if (addEventListenerIDIntoDict("heatmap-start-time", "onchange") === true) {
+        $("#heatmap-start-time").change(function (e) {
+            setEndTimeMinDateTime("heatmap-start-time", "heatmap-end-time");
+        })
+    }
+
+    if (addEventListenerIDIntoDict("heatmap-end-time", "onchange") === true) {
+        $("#heatmap-end-time").change(function (e) {
+            setStartTimeMaxDateTime("heatmap-start-time", "heatmap-end-time");
+        })
+    }
+    //heatmap_timeDatePicker.initDate("heatmap-start-time", "heatmap-end-time");
+    mapboxgl.accessToken = 'pk.eyJ1IjoiemVyb25lLWppYSIsImEiOiJjamc5eG5nanIyNjUxMndybjR4bW44djFpIn0._bHsaywMOGemkFMrjOnRnA';
+    var heatmap = new mapboxgl.Map({
+        container: 'heatmap',
+        style: 'mapbox://styles/mapbox/dark-v9',
+        center: [-79.91916660915508, 43.26067233388491],
+        zoom: 16,
+        minZoom: 15.4,
+        maxBounds: [[-79.93375671429548, 43.2554624879501],
+            [-79.90754457136283, 43.26924473063363]]
+    });
+
+
+    heatmap.on('load', function () {
+        // Add a geojson point source.
+        // Heatmap layers also work with a vector tile source.
+        heatmap.addSource('userlocation', {
+            "type": "geojson",
+            "data": g_HeatMap_URL
+        });
+
+        //"http://127.0.0.1:8000/eventapi/heatmapLocation?pid=1&start_time=2018-12-10 10:00:00&end_time=2018-12-10 20:00:00"
+
+        heatmap.addLayer({
+            "id": "userlocation-heat",
+            "type": "heatmap",
+            "source": "userlocation",
+            "maxzoom": 24,
+            "paint": {
+                // Increase the heatmap weight based on frequency and property magnitude
+                "heatmap-weight": [
+                    "interpolate",
+                    ["linear"],
+                    ["get", "mag"],
+                    0, 0,
+                    6, 1
+                ],
+                // Increase the heatmap color weight weight by zoom level
+                // heatmap-intensity is a multiplier on top of heatmap-weight
+                "heatmap-intensity": [
+                    "interpolate",
+                    ["linear"],
+                    ["zoom"],
+                    0, 1,
+                    9, 3
+                ],
+                // Color ramp for heatmap.  Domain is 0 (low) to 1 (high).
+                // Begin color ramp at 0-stop with a 0-transparancy color
+                // to create a blur-like effect.
+                "heatmap-color": [
+                    "interpolate",
+                    ["linear"],
+                    ["heatmap-density"],
+                    0, "rgba(33,102,172,0)",
+                    0.2, "rgb(103,169,207)",
+                    0.4, "rgb(209,229,240)",
+                    0.6, "rgb(253,219,199)",
+                    0.8, "rgb(239,138,98)",
+                    1, "rgb(178,24,43)"
+                ],
+                // Adjust the heatmap radius by zoom level
+                "heatmap-radius": [
+                    "interpolate",
+                    ["linear"],
+                    ["zoom"],
+                    0, 2,
+                    9, 7
+                ],
+                // Transition from heatmap to circle layer by zoom level
+                "heatmap-opacity": [
+                    "interpolate",
+                    ["linear"],
+                    ["zoom"],
+                    1, 1,
+                    30, 0
+                ],
+            }
+        }, 'waterway-label');
+
+        heatmap.addLayer({
+            "id": "userlocation-point",
+            "type": "circle",
+            "source": "userlocation",
+            "minzoom": 18,
+            "paint": {
+                // circle radius
+                "circle-radius": [
+                    "interpolate",
+                    ["linear"],
+                    ["zoom"],
+                    0, 2
+                ],
+                // circle color
+                "circle-color": [
+                    "interpolate",
+                    ["linear"],
+                    ["get", "mag"],
+                    1, "rgba(33,102,172,0)",
+                    2, "rgb(103,169,207)",
+                    3, "rgb(209,229,240)",
+                    4, "rgb(253,219,199)",
+                    5, "rgb(239,138,98)",
+                    6, "rgb(178,24,43)"
+                ],
+                "circle-stroke-color": "white",
+                "circle-stroke-width": 1,
+                // Transition from heatmap to circle layer by zoom level
+                "circle-opacity": [
+                    "interpolate",
+                    ["linear"],
+                    ["zoom"],
+                    7, 0,
+                    8, 1
+                ]
+            }
+        }, 'waterway-label');
+    });
+
+</script>

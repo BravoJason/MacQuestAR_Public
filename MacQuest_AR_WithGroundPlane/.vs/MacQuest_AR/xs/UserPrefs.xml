@@ -1,0 +1,17 @@
+﻿<Properties StartupConfiguration="{9DCCC4FB-2E7B-3F5A-C228-8687E7A04C53}|">
+  <MonoDevelop.Ide.ItemProperties.Assembly-CSharp PreferredExecutionTarget="Unity.Editor" />
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Scripts/navCreator.cs">
+    <Files>
+      <File FileName="Assets/Scripts/labelCreator.cs" Line="139" Column="33" />
+      <File FileName="Assets/Scripts/navCreator.cs" Line="53" Column="74" />
+      <File FileName="Assets/Scripts/headingControl.cs" Line="9" Column="36" />
+      <File FileName="Assets/Scripts/QRScanner.cs" Line="188" Column="43" />
+    </Files>
+  </MonoDevelop.Ide.Workbench>
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
+  <MonoDevelop.Ide.DebuggingService.Breakpoints>
+    <BreakpointStore />
+  </MonoDevelop.Ide.DebuggingService.Breakpoints>
+  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
+  <MultiItemStartupConfigurations />
+</Properties>

@@ -1,0 +1,492 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:fab="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <FrameLayout
+        android:id="@+id/container"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context="com.mcmaster.wiser.idyll.view.MapFragment"></FrameLayout>
+
+    <com.arlib.floatingsearchview.FloatingSearchView
+        android:id="@+id/map_floating_search_view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_alignParentStart="true"
+
+        app:floatingSearch_close_search_on_keyboard_dismiss="true"
+        app:floatingSearch_leftActionMode="showHamburger"
+        app:floatingSearch_searchBarMarginLeft="@dimen/search_view_inset"
+        app:floatingSearch_searchBarMarginRight="@dimen/search_view_inset"
+        app:floatingSearch_searchBarMarginTop="@dimen/search_view_inset"
+        app:floatingSearch_searchHint="Search for a room..."
+        app:floatingSearch_showSearchKey="true"
+        app:floatingSearch_suggestionsListAnimDuration="250">
+
+        <Button
+            android:id="@+id/map_clear_route_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_marginLeft="@dimen/search_view_inset"
+            android:layout_marginTop="@dimen/floating_search_view_gap"
+            android:backgroundTint="@color/colorPrimary"
+            android:text="Clear Route"
+            android:textColor="@color/colorWhite"
+            android:visibility="gone" />
+
+        <Button
+            android:id="@+id/map_toggle_ar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_marginLeft="@dimen/search_view_inset"
+            android:layout_marginTop="@dimen/floating_search_view_gap"
+            android:backgroundTint="@color/colorPrimary"
+            android:text="Toggle AR"
+            android:textColor="@color/colorWhite"
+            android:visibility="gone"
+
+            />
+    </com.arlib.floatingsearchview.FloatingSearchView>
+
+
+
+    <android.support.v7.widget.CardView
+        android:id="@+id/event_list_card"
+        android:layout_width="120dp"
+        android:layout_height="250dp"
+        android:layout_marginBottom="100dp"
+        android:layout_marginLeft="@dimen/search_bar_left_icon_left_margin"
+        android:alpha="0.75"
+        android:layout_alignParentBottom="true"
+        android:visibility="gone"
+        >
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:id="@+id/events_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentTop="true"
+                android:layout_centerInParent="true"
+                android:text="Events"
+                android:textColor="@color/colorBlack"/>
+
+            <ListView
+                android:id="@+id/event_list"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/events_text"
+                android:layout_margin="4dp"
+                android:background="@color/transparent"
+                android:textAlignment="center" />
+
+
+        </RelativeLayout>
+
+    </android.support.v7.widget.CardView>
+
+
+    <android.support.v7.widget.CardView
+        android:id="@+id/toggle_current_events"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/floating_search_view_gap"
+        android:layout_marginBottom="16dp"
+        android:layout_centerInParent="true"
+        android:layout_alignParentBottom="true"
+        android:visibility="gone"
+        app:cardCornerRadius="4dp">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <!--
+            <CheckBox
+                android:id="@+id/checkbox_current_events"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Show Current Events "/>
+            !-->
+
+            <Button
+                android:id="@+id/clear_events_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Clear Event Points"
+
+                android:backgroundTint="@color/colorPrimary"
+                android:textColor="@color/colorWhite"
+
+                />
+        </RelativeLayout>
+
+
+
+
+    </android.support.v7.widget.CardView>
+
+    <!--<com.getbase.floatingactionbutton.FloatingActionsMenu-->
+        <!--android:id="@+id/multiple_actions_parent_fab"-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_alignParentBottom="true"-->
+        <!--android:layout_alignParentLeft="true"-->
+        <!--android:layout_alignParentStart="true"-->
+        <!--android:layout_gravity="end|bottom"-->
+        <!--android:layout_margin="16dp"-->
+        <!--android:layout_marginBottom="48dp"-->
+        <!--android:layout_marginLeft="26dp"-->
+        <!--android:layout_marginStart="26dp"-->
+        <!--fab:fab_addButtonColorNormal="@color/colorPrimary"-->
+        <!--fab:fab_addButtonColorPressed="@color/colorPrimaryDark"-->
+        <!--fab:fab_addButtonPlusIconColor="@color/colorAccent"-->
+        <!--fab:fab_labelsPosition="right">-->
+
+        <!--fab:fab_labelStyle="@style/menu_labels_style"-->
+
+        <com.getbase.floatingactionbutton.FloatingActionButton
+            android:id="@+id/fab_toggle_location"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_gravity="end|bottom"
+            android:layout_margin="16dp"
+            android:layout_marginLeft="26dp"
+            android:layout_marginStart="26dp"
+            app:fab_icon="@drawable/ic_my_location_white_24dp"
+            fab:fab_colorNormal="@color/colorPrimary"
+            fab:fab_size="mini"
+            fab:fab_title="@string/location" />
+
+
+    <LinearLayout
+        android:id="@+id/floor_level_buttons"
+        android:layout_width="@dimen/button_dimen"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:layout_margin="16dp"
+        android:orientation="vertical">
+
+        <Button
+            android:id="@+id/level_button_seven"
+            android:layout_width="@dimen/button_dimen"
+            android:layout_height="@dimen/button_dimen"
+            android:background="@color/colorPrimary"
+            android:text="@string/floor_7"
+            android:textColor="@color/colorAccent" />
+
+        <Button
+            android:id="@+id/level_button_six"
+            android:layout_width="@dimen/button_dimen"
+            android:layout_height="@dimen/button_dimen"
+            android:background="@color/colorPrimary"
+            android:text="@string/floor_6"
+            android:textColor="@color/colorAccent" />
+
+        <Button
+            android:id="@+id/level_button_five"
+            android:layout_width="@dimen/button_dimen"
+            android:layout_height="@dimen/button_dimen"
+            android:background="@color/colorPrimary"
+            android:text="@string/floor_5"
+            android:textColor="@color/colorAccent" />
+
+        <Button
+            android:id="@+id/level_button_four"
+            android:layout_width="@dimen/button_dimen"
+            android:layout_height="@dimen/button_dimen"
+            android:background="@color/colorPrimary"
+            android:text="@string/floor_4"
+            android:textColor="@color/colorAccent" />
+
+        <Button
+            android:id="@+id/level_button_three"
+            android:layout_width="@dimen/button_dimen"
+            android:layout_height="@dimen/button_dimen"
+            android:background="@color/colorPrimary"
+            android:text="@string/floor_3"
+            android:textColor="@color/colorAccent" />
+
+        <Button
+            android:id="@+id/level_button_two"
+            android:layout_width="@dimen/button_dimen"
+            android:layout_height="@dimen/button_dimen"
+            android:background="@color/colorPrimary"
+            android:text="@string/floor_2"
+            android:textColor="@color/colorAccent" />
+
+        <Button
+            android:id="@+id/level_button_one"
+            android:layout_width="@dimen/button_dimen"
+            android:layout_height="@dimen/button_dimen"
+            android:background="@color/colorPrimary"
+            android:text="@string/floor_1"
+            android:textColor="@color/colorAccent" />
+
+        <Button
+            android:id="@+id/level_button_zero"
+            android:layout_width="@dimen/button_dimen"
+            android:layout_height="@dimen/button_dimen"
+            android:background="@color/colorPrimary"
+            android:text="@string/floor_b"
+            android:textColor="@color/colorAccent" />
+
+        <Button
+            android:id="@+id/level_button_sub_zero"
+            android:layout_width="@dimen/button_dimen"
+            android:layout_height="@dimen/button_dimen"
+            android:background="@color/colorPrimary"
+            android:text="@string/floor_2b"
+            android:textColor="@color/colorAccent" />
+
+    </LinearLayout>
+
+    <android.support.v7.widget.CardView
+        android:id="@+id/info_cardview"
+        android:layout_width="match_parent"
+        android:layout_height="160dp"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_margin="@dimen/cardview_margin"
+        android:elevation="@dimen/cardview_default_elevation"
+        android:visibility="gone"
+        app:cardCornerRadius="@dimen/cardview_default_radius">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <Button
+                android:id="@+id/info_directions"
+                android:layout_width="@dimen/square_button_size"
+                android:layout_height="@dimen/square_button_size"
+                android:layout_alignParentBottom="true"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:layout_margin="16dp"
+                android:background="@drawable/ic_directions_black_24dp"
+                android:backgroundTint="@color/colorPrimary" />
+
+            <TextView
+                android:id="@+id/info_text_room_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="16dp"
+                android:text="@string/placeholder_text_room_name"
+                android:textColor="@color/colorPrimary"
+                android:textSize="24sp" />
+
+            <TextView
+                android:id="@+id/info_text_building_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/info_text_room_name"
+                android:layout_marginLeft="16dp"
+                android:layout_marginStart="16dp"
+                android:text="@string/placeholder_text_building_name"
+                android:textColor="@color/colorPrimaryDark" />
+
+            <TextView
+                android:id="@+id/book_this_room"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:layout_alignParentRight="true"
+                android:layout_margin="24dp"
+                android:text="@string/book_this_room"
+                android:visibility="gone"
+                android:textColor="@color/colorPrimary" />
+
+
+            <!--<CheckBox-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:text="Avoid Indoor Pathways"-->
+            <!--android:textColor="@color/colorPrimary"-->
+            <!--android:onClick="onCheckboxClicked"-->
+            <!--android:layout_alignBaseline="@+id/info_directions"-->
+            <!--android:layout_alignBottom="@+id/info_directions"-->
+            <!--android:layout_alignParentRight="true"-->
+            <!--android:layout_alignParentEnd="true"-->
+            <!--android:layout_marginRight="50dp"-->
+            <!--android:layout_marginEnd="50dp" />-->
+
+        </RelativeLayout>
+
+    </android.support.v7.widget.CardView>
+
+    <android.support.v7.widget.CardView
+        android:id="@+id/directions_cardview"
+        android:layout_width="match_parent"
+        android:layout_height="230dp"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_margin="@dimen/cardview_margin"
+        android:elevation="@dimen/cardview_default_elevation"
+        android:visibility="gone"
+        app:cardCornerRadius="@dimen/cardview_default_radius">
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+
+                <com.arlib.floatingsearchview.FloatingSearchView
+                    android:id="@+id/routing_floating_search_view"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_margin="@dimen/cardview_margin"
+                    android:visibility="visible"
+                    app:floatingSearch_close_search_on_keyboard_dismiss="true"
+                    app:floatingSearch_dimBackground="true"
+                    app:floatingSearch_searchHint="Current Location"
+                    app:floatingSearch_showSearchKey="false"
+                    app:floatingSearch_suggestionsListAnimDuration="250" />
+
+                <TextView
+                    android:id="@+id/routing_text_to"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_above="@+id/checkbox_routing_criteria"
+                    android:layout_margin="16dp"
+                    android:text="To: "
+                    android:textSize="18sp"/>
+
+                <TextView
+                    android:id="@+id/routing_text_destination"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_above="@+id/checkbox_routing_criteria"
+                    android:layout_margin="16dp"
+                    android:layout_toRightOf="@+id/routing_text_to"
+                    android:text="ITB 220"
+                    android:textSize="16sp" />
+
+                <EditText
+                    android:id="@+id/edit_text_destination"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_above="@+id/checkbox_routing_criteria"
+                    android:layout_margin="@dimen/cardview_margin"
+                    android:hint="To"
+                    android:visibility="gone" />
+
+                <Button
+                    android:id="@+id/directions_go_button"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentBottom="true"
+                    android:layout_alignParentRight="true"
+                    android:layout_margin="@dimen/cardview_margin"
+                    android:text="GO!" />
+
+                <CheckBox
+                    android:id="@+id/checkbox_routing_criteria"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_above="@id/checkbox_routing_ar"
+                    android:layout_margin="@dimen/cardview_margin"
+                    android:onClick="onCheckboxClicked"
+                    android:text="@string/avoid_indoor_pathways"
+                    android:textColor="@color/colorPrimary" />
+
+                <CheckBox
+                    android:id="@+id/checkbox_routing_ar"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentBottom="true"
+                    android:layout_margin="@dimen/cardview_margin"
+                    android:text="AR Navigation (Only Outdoors)"
+                    android:textColor="@color/colorPrimary"
+                    android:clickable="false"
+                    android:visibility="invisible"
+                    android:enabled="false"/>
+
+            </RelativeLayout>
+
+        </FrameLayout>
+
+    </android.support.v7.widget.CardView>
+
+    <android.support.v7.widget.CardView
+        android:id="@+id/route_info"
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:layout_margin="@dimen/cardview_margin"
+        android:layout_alignParentBottom="true"
+        android:layout_toEndOf="@+id/fab_toggle_location"
+        android:layout_toLeftOf="@+id/floor_level_buttons"
+        android:layout_toRightOf="@+id/fab_toggle_location"
+        android:layout_toStartOf="@+id/floor_level_buttons"
+        android:elevation="@dimen/cardview_default_elevation"
+        android:visibility="gone"
+        app:cardCornerRadius="@dimen/cardview_default_radius">
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@+id/route_info"
+            android:layout_centerHorizontal="true">
+
+
+            <RelativeLayout
+                android:layout_width="228dp"
+                android:layout_height="match_parent">
+
+                <TextView
+                    android:id="@+id/info_text_to"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="16dp"
+                    android:text="ETA: "
+                    android:textSize="18sp" />
+
+                <CheckBox
+                    android:id="@+id/checkbox_show_dest"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentBottom="true"
+                    android:layout_margin="@dimen/cardview_margin"
+                    android:onClick="onCheckboxClicked"
+                    android:text="Highlight Destination"
+                    android:textColor="@color/colorPrimary" />
+
+            </RelativeLayout>
+
+        </FrameLayout>
+
+    </android.support.v7.widget.CardView>
+
+    <ProgressBar
+        android:id="@+id/progress_bar"
+        style="?android:attr/progressBarStyleLarge"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_centerInParent="true"
+        android:paddingLeft="25dp"
+        android:paddingRight="25dp"
+        android:visibility="gone" />
+
+</RelativeLayout>
+

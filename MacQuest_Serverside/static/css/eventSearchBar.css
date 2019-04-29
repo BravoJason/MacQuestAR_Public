@@ -1,0 +1,17 @@
+#eventSearch-filter-ctrl {
+    position: absolute;
+    top: 10px;
+    left: 20px;
+    z-index: 1;
+    width: 100%;
+    padding: 2px;
+}
+
+#SearchOption p{
+    margin-top: 8px;
+    margin-bottom: 8px;
+}
+
+#SearchOption button{
+    margin-top: 16px;
+}

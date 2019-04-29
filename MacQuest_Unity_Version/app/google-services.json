@@ -1,0 +1,63 @@
+{
+  "project_info": {
+    "project_number": "941529389105",
+    "firebase_url": "https://macquestar.firebaseio.com",
+    "project_id": "macquestar",
+    "storage_bucket": "macquestar.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:941529389105:android:e7905738e1ae03e8",
+        "android_client_info": {
+          "package_name": "com.mcmaster.wiser.idyll"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "941529389105-b9hp7bs5sektretnr950n535atv8ee0s.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.mcmaster.wiser.idyll",
+            "certificate_hash": "1c305854b4cae59fe4b3a707aceb1d6b3695fe8f"
+          }
+        },
+        {
+          "client_id": "941529389105-l9jq5prquvrjk04j3fr1ug8efnvd9bgd.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.mcmaster.wiser.idyll",
+            "certificate_hash": "042fc0b3b26645ea14f00c0702c6ad438334c077"
+          }
+        },
+        {
+          "client_id": "941529389105-g93dpege2p6ncfotjcvddukgkkhcf9ar.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCVubhLTEcV72tnWjPLNr57DpRXy9TppUI"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "941529389105-g93dpege2p6ncfotjcvddukgkkhcf9ar.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
